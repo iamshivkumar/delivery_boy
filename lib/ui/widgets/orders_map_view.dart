@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'order_card.dart';
 
-
 class OrdersMapView extends ConsumerWidget {
   final String status;
   OrdersMapView({this.status});
@@ -60,11 +59,28 @@ class OrdersMapView extends ConsumerWidget {
           initialCameraPosition: mapModel.position,
           onMapCreated: (controller) => mapModel.setController(controller),
         ),
+        Positioned(
+          right: 4,
+          top: 128,
+          child: RawMaterialButton(
+            elevation: 2,
+            child: Icon(
+              Icons.layers_outlined,
+            ),
+            onPressed: mapModel.toggleMapType,
+            constraints: BoxConstraints.tightFor(
+              width: 40,
+              height: 40,
+            ),
+            shape: CircleBorder(),
+            fillColor: Colors.white,
+          ),
+        ),
         mapModel.order != null
             ? Positioned(
-              bottom: 0,
-              left: 0,
-              right: 120,
+                bottom: 0,
+                left: 0,
+                right: 120,
                 child: SmallOrderCard(
                   order: mapModel.order,
                 ),

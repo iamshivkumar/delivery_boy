@@ -17,15 +17,23 @@ class OrdersViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-
-
-
-
   bool mapMode = false;
   void setMapMode(bool value) {
     mapMode = value;
     notifyListeners();
+  }
+
+  bool given = false;
+
+  void setGiven(bool value) {
+    given = value;
+    notifyListeners();
+  }
+
+  void setAsDelivered(String id) {
+    _firestore
+        .collection("orders")
+        .doc(id)
+        .update({"status": "Delivered", "payment": "Paid"});
   }
 }
