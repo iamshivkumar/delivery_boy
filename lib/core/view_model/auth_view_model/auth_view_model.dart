@@ -36,7 +36,7 @@ class AuthViewModel extends ChangeNotifier {
           otpSent = false;
           notifyListeners();
           user = (await _auth.signInWithCredential(credential)).user;
-          Fluttertoast.showToast(msg: "Login Successful");
+          Fluttertoast.showToast(msg: "Sign In Successful");
           onVerify();
         },
         verificationFailed: (FirebaseAuthException e) {
@@ -72,7 +72,7 @@ class AuthViewModel extends ChangeNotifier {
         smsCode: smsController.text,
       );
       user = (await _auth.signInWithCredential(credential)).user;
-      Fluttertoast.showToast(msg: "Login Successful");
+      Fluttertoast.showToast(msg: "Sign In Successful");
     } catch (e) {
       Fluttertoast.showToast(msg: "Failed to sign in: " + e.code.toString());
     }
@@ -81,9 +81,9 @@ class AuthViewModel extends ChangeNotifier {
     return user;
   }
 
-  Future<void> logout() async {
+  Future<void> signOut() async {
     await _auth.signOut();
     user = null;
-    Fluttertoast.showToast(msg: "Logout Successful");
+    Fluttertoast.showToast(msg: "Sign Out Successful");
   }
 }

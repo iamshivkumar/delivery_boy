@@ -2,7 +2,6 @@ import 'package:delivery_boy/core/streams/orders_list_stream_provider.dart';
 import 'package:delivery_boy/core/view_model/orders_view_model/orders_view_model_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-
 import 'order_card.dart';
 class OrdersPageView extends ConsumerWidget {
   final String status;

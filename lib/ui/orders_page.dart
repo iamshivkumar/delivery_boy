@@ -1,5 +1,7 @@
 import 'package:delivery_boy/core/services/date.dart';
+import 'package:delivery_boy/core/view_model/auth_view_model/auth_view_model_provider.dart';
 import 'package:delivery_boy/core/view_model/orders_view_model/orders_view_model_provider.dart';
+import 'package:delivery_boy/ui/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/orders_card_view.dart';
@@ -71,6 +73,25 @@ class _OrdersPageState extends State<OrdersPage>
                 value: model.mapMode,
                 onChanged: model.setMapMode,
               ),
+              PopupMenuButton<bool>(
+                onSelected: (value) {
+                  if (value) {
+                    context.read(authViewModelProvider).signOut();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignInPage(),
+                      ),
+                    );
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: Text("Sign Out"),
+                    value: true,
+                  )
+                ],
+              )
             ],
             title: Text('My Deliveries'),
             bottom: TabBar(
@@ -80,7 +101,6 @@ class _OrdersPageState extends State<OrdersPage>
                 }
               },
               controller: _controller,
-              isScrollable: true,
               tabs: tabTexts
                   .map(
                     (e) => Tab(

@@ -78,9 +78,9 @@ class OrdersMapView extends ConsumerWidget {
         ),
         mapModel.order != null
             ? Positioned(
-                bottom: 0,
+                bottom: 56,
                 left: 0,
-                right: 120,
+                right: 80,
                 child: SmallOrderCard(
                   order: mapModel.order,
                 ),

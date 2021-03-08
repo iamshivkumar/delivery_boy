@@ -54,6 +54,9 @@ class OrderDetailsPage extends ConsumerWidget {
                           ),
                           trailing: Text(
                             "₹" + (product.qt * product.price).toString(),
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold),
                           ),
                         );
                       }).toList(),
@@ -154,7 +157,13 @@ class OrderDetailsPage extends ConsumerWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(order.customerAddress),
+                      child: Text(
+                        order.customerAddress,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -203,7 +212,7 @@ class PopWidget extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            order.paymentMethod == "Cash On Delivery"
+            order.paymentMethod == "Cash On Delivery"&&order.paymentStatus=="Not Paid"
                 ? Row(
                     children: [
                       Checkbox(
@@ -228,7 +237,14 @@ class PopWidget extends ConsumerWidget {
         ),
       ),
       actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text("CANCEL"),
+        ),
         MaterialButton(
+          padding: EdgeInsets.symmetric(horizontal: 24),
           onPressed: () {
             if (order.paymentMethod == "Cash On Delivery" && !model.given) {
               Fluttertoast.showToast(
@@ -243,11 +259,6 @@ class PopWidget extends ConsumerWidget {
           child: Text("DELIVERED"),
           color: Theme.of(context).accentColor,
         ),
-        TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel"))
       ],
     );
   }
